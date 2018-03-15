@@ -4,6 +4,10 @@ import { createStore, applyMiddleware, compose } from 'redux'
 import reducer from './reducers'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
+import { ApolloClient } from 'apollo-client'
+import { ApolloProvider } from 'react-apollo'
+import { createHttpLink } from 'apollo-link-http'
+import { InMemoryCache } from 'apollo-cache-inmemory'
 import './App.css'
 
 // Import Views
@@ -28,18 +32,25 @@ const store = createStore(
   compostEnhancers(applyMiddleware(logger, thunk))
 )
 
+const client = new ApolloClient({
+  link: createHttpLink({ uri: 'https://jesseweigel.com/graphql' }),
+  cache: new InMemoryCache()
+})
+
 class App extends Component {
   render () {
     return (
-      <Provider store={store}>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path='/' component={Home} />
-            <Route exact path='/:category' component={Category} />
-            <Route path='/:category/:post_id' component={PostDetail} />
-          </Switch>
-        </BrowserRouter>
-      </Provider>
+      <ApolloProvider client={client}>
+        <Provider store={store}>
+          <BrowserRouter>
+            <Switch>
+              <Route exact path='/' component={Home} />
+              <Route exact path='/:category' component={Category} />
+              <Route path='/:category/:post_id' component={PostDetail} />
+            </Switch>
+          </BrowserRouter>
+        </Provider>
+      </ApolloProvider>
     )
   }
 }
