@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
 class Category extends Component {
   render () {
@@ -7,8 +6,4 @@ class Category extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  posts: state.getPosts
-})
-
-export default connect(mapStateToProps)(Category)
+export default Category

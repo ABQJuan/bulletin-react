@@ -7,21 +7,22 @@
     "apollo-client-preset": "^1.0.8",
     "graphql": "^0.13.1",
     "graphql-tag": "^2.8.0",
+    "material-ui": "^1.0.0-beta.37",
+    "material-ui-icons": "^1.0.0-beta.36",
+    "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-apollo": "^2.1.0-beta.3",
     "react-dom": "^16.2.0",
-    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.1.1",
-    "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "typeface-roboto": "^0.0.54"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "lint": "prettier 'src/**/*.js' 'src/components/**/*.js' '*.js' --write --single-quote --no-semi && standard --fix",
+    "lint": "prettier 'src/**/*.js' 'src/components/**/*.js' '*.js' --write --config .prettierrc && standard --fix",
     "precommit": "lint-staged"
   },
   "devDependencies": {
