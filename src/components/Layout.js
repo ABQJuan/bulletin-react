@@ -16,6 +16,10 @@ import ChevronLeftIcon from 'material-ui-icons/ChevronLeft'
 import { ListItem, ListItemText } from 'material-ui/List'
 import { Link } from 'react-router-dom'
 import MoreVertIcon from 'material-ui-icons/MoreVert'
+import PrintIcon from 'material-ui-icons/Print'
+import ViewQuiltIcon from 'material-ui-icons/ViewQuilt'
+import SearchIcon from 'material-ui-icons/Search'
+import Menu, { MenuItem } from 'material-ui/Menu'
 
 const theme = createMuiTheme({
   palette: {
@@ -29,6 +33,10 @@ const theme = createMuiTheme({
 const drawerWidth = 250
 
 const styles = theme => ({
+  logo: {
+    width: '236px',
+    margin: '8px auto'
+  },
   link: {
     textDecoration: 'none'
   },
@@ -47,6 +55,9 @@ const styles = theme => ({
     height: '100%'
   },
   appBar: {
+    background: '#fff',
+    borderBottom: 'solid 3px #998643',
+
     position: 'fixed',
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
@@ -111,7 +122,8 @@ const styles = theme => ({
 
 class Layout extends Component {
   state = {
-    open: true
+    open: true,
+    anchorEl: null
   }
   constructor () {
     super()
@@ -124,6 +136,14 @@ class Layout extends Component {
 
   handleDrawerClose () {
     this.setState({ open: false })
+  }
+
+  handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget })
+  }
+
+  handleClose = () => {
+    this.setState({ anchorEl: null })
   }
 
   render () {
@@ -140,7 +160,7 @@ class Layout extends Component {
             >
               <Toolbar disableGutters={!this.state.open}>
                 <IconButton
-                  color='inherit'
+                  color='primary'
                   aria-label='open drawer'
                   onClick={this.handleDrawerOpen}
                   className={classNames(
@@ -153,14 +173,33 @@ class Layout extends Component {
                 <Typography
                   className={classes.flex}
                   type='title'
-                  color='inherit'
+                  color='primary'
                   noWrap
                 >
                   FUS Bulletin
                 </Typography>
-                <IconButton>
+                <IconButton color='primary'>
+                  <SearchIcon />
+                </IconButton>
+                <IconButton color='primary'>
+                  <ViewQuiltIcon />
+                </IconButton>
+                <IconButton color='primary'>
+                  <PrintIcon />
+                </IconButton>
+                <IconButton color='primary' onClick={this.handleClick}>
                   <MoreVertIcon />
                 </IconButton>
+                <Menu
+                  id='simple-menu'
+                  anchorEl={this.state.anchorEl}
+                  open={Boolean(this.state.anchorEl)}
+                  onClose={this.handleClose}
+                >
+                  <MenuItem onClick={this.handleClose}>Profile</MenuItem>
+                  <MenuItem onClick={this.handleClose}>My account</MenuItem>
+                  <MenuItem onClick={this.handleClose}>Logout</MenuItem>
+                </Menu>
               </Toolbar>
             </AppBar>
             <Drawer
@@ -172,6 +211,11 @@ class Layout extends Component {
             >
               <div className={classes.drawerInner}>
                 <div className={classes.drawerHeader}>
+                  <img
+                    className={classes.logo}
+                    src='https://rc.franciscan.university/static/media/fus-logo.5e5882da.svg'
+                    alt=''
+                  />
                   <IconButton onClick={this.handleDrawerClose}>
                     <ChevronLeftIcon />
                   </IconButton>

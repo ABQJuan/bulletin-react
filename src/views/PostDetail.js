@@ -26,11 +26,7 @@ class PostDetail extends Component {
     return (
       <div>
         <h1>{post.title}</h1>
-        <img
-          alt=''
-          style={{ height: '600px', width: '800px' }}
-          src={post.featuredImage.sourceUrl}
-        />
+
         <div dangerouslySetInnerHTML={{ __html: post.content }} />
         <h4>Author: {post.author.name}</h4>
         <h5>Date: {date}</h5>
