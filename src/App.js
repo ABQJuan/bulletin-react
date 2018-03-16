@@ -4,8 +4,6 @@ import { ApolloProvider } from 'react-apollo'
 import client from '../src/graphql/apolloClient'
 import 'typeface-roboto'
 
-import './App.css'
-
 // Import Views
 import Category from './views/Category'
 import Home from './views/Home'
